@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const ShelfChanger = ({ book, onChangeShelf }) => {
 	const shelves = [{
@@ -29,12 +30,12 @@ const ShelfChanger = ({ book, onChangeShelf }) => {
 	)
 }
 
-const Book = ({
-	book,
-	width,
-	height,
-	onChangeShelf
-}) => {
+ShelfChanger.propTypes = {
+	book: PropTypes.object.isRequired,
+	onChangeShelf: PropTypes.func.isRequired
+}
+
+const Book = ({ book, width, height, onChangeShelf }) => {
 
 	return (
 		<div className="book">
@@ -59,6 +60,13 @@ const Book = ({
 Book.defaultProps = {
 	width: 128,
 	height: 188
+}
+
+Book.propTypes = {
+	book: PropTypes.object,
+	width: PropTypes.number,
+	height: PropTypes.number,
+	onChangeShelf: PropTypes.func.isRequired
 }
 
 export default Book

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Loading from './Loading'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
@@ -8,6 +9,11 @@ import debounce from 'lodash/debounce'
 const MaxSearchResult = 10
 
 class SearchBook extends Component {
+	static propTypes = {
+		books: PropTypes.array.isRequired,
+		onChangeShelf: PropTypes.func.isRequired
+	}
+
 	constructor(props, context) {
 		super(props, context)
 		this.searchBook = debounce(this.searchBook, 200)
