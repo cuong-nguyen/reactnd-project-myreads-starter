@@ -27,13 +27,28 @@ class SearchBook extends Component {
 		const { query } = this.state
 		this.setState({ searching: true })
 
-		BooksAPI.search(query, MaxSearchResult)
+		BooksAPI
+			.search(query, MaxSearchResult)
 			.then(books => {
-				this.setState({ books: books || [], searching: false })
+				this.setState({
+					books: this.updateBooksShelfChanger(books),
+					searching: false
+				})
 			})
 			.catch(err => {
 				this.setState({ searching: false })
 			})
+	}
+
+	updateBooksShelfChanger = (books = []) => {
+		const currentBooks = this.props.books
+		return books.map(book => {
+			const bookInShelf = currentBooks.find(b => b.id === book.id)
+			if (bookInShelf) {
+				book.shelf = bookInShelf.shelf
+			}
+			return book
+		})
 	}
 
 	render() {
@@ -54,15 +69,17 @@ class SearchBook extends Component {
 					</div>
 				</div>
 				<div className="search-books-results">
-					{searching ? <Loading /> : (
-						<ol className="books-grid">
-							{books.map(book =>
-								<li key={book.industryIdentifiers[0].identifier}>
-									<Book book={book} />
-								</li>
-							)}
-						</ol>
-					)}
+					{searching
+						? <Loading />
+						: (
+							<ol className="books-grid">
+								{books.map(book =>
+									<li key={book.id}>
+										<Book book={book} onChangeShelf={this.props.onChangeShelf} />
+									</li>
+								)}
+							</ol>
+						)}
 				</div>
 			</div>
 		)

@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 import Loading from './Loading'
 
-const ListBooks = ({ loaded, shelves, onChangeShelf }) => {
-
-	const { currentlyReading, wantToRead, read } = shelves
-
+const ListBooks = ({ loaded, books, onChangeShelf }) => {
 	return (
 		<div className="list-books">
 			<div className="list-books-title">
@@ -17,17 +14,17 @@ const ListBooks = ({ loaded, shelves, onChangeShelf }) => {
 					<div>
 						<BookShelf
 							shelf="Currently Reading"
-							books={currentlyReading}
+							books={books.filter(book => book.shelf === 'currentlyReading')}
 							onChangeShelf={onChangeShelf}
 						/>
 						<BookShelf
 							shelf="Want to Read"
-							books={wantToRead}
+							books={books.filter(book => book.shelf === 'wantToRead')}
 							onChangeShelf={onChangeShelf}
 						/>
 						<BookShelf
 							shelf="Read"
-							books={read}
+							books={books.filter(book => book.shelf === 'read')}
 							onChangeShelf={onChangeShelf}
 						/>
 					</div>

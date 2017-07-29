@@ -8,39 +8,42 @@ import * as BooksAPI from './BooksAPI'
 class BooksApp extends Component {
 	state = {
 		loaded: false,
-		shelves: {
-			currentlyReading: [],
-			wantToRead: [],
-			read: []
-		}
+		books: []
 	}
 
 	componentDidMount() {
-		BooksAPI.getAll()
-			.then(books => {
-				const currentShelves = this.state.shelves
-
-				books.forEach(book => currentShelves[book.shelf].push(book))
-
-				this.setState({ shelves: currentShelves, loaded: true })
-			})
+		BooksAPI
+			.getAll()
+			.then(books => this.setState({ books: books, loaded: true }))
 			.catch(err => {
 				this.setState({ loaded: true })
 			})
 	}
 
 	handleChangeShelf = (book, newShelf) => {
-		BooksAPI.update(book, newShelf)
-			.then(() => {
-				this.setState(prevState => {
-					const currentShelves = prevState.shelves
-					const updatedShelves = {
-						[book.shelf]: currentShelves[book.shelf].filter(b => b.title !== book.title),
-						[newShelf]: currentShelves[newShelf].concat(Object.assign({}, book, { shelf: newShelf }))
-					}
+		BooksAPI
+			.update(book, newShelf)
+			.then((response) => {
+				let books
 
-					return { shelves: Object.assign({}, currentShelves, updatedShelves) }
-				})
+				if (newShelf === 'none') {
+					books = this.state.books.filter(b => b.id !== book.id)
+				} else {
+					let bookFound = false
+					books = this.state.books.map(currentBook => {
+						if (currentBook.id === book.id) {
+							currentBook.shelf = newShelf
+							bookFound = true
+						}
+						return currentBook
+					})
+
+					if (!bookFound) {
+						books = [...books, Object.assign({}, book, { shelf: newShelf })]
+					}
+				}
+
+				this.setState({ books: books })
 			})
 	}
 
@@ -48,11 +51,12 @@ class BooksApp extends Component {
 		return (
 			<div className="app">
 				<Route
-					exact
-					path="/"
+					exact path="/"
 					render={() => <ListBooks {...this.state} onChangeShelf={this.handleChangeShelf} />}
 				/>
-				<Route path="/search" component={SearchBook} />
+				<Route
+					path="/search"
+					render={() => <SearchBook books={this.state.books} onChangeShelf={this.handleChangeShelf} />} />
 			</div>
 		)
 	}
