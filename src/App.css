@@ -174,3 +174,8 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+.loading {
+	display: flex;
+	justify-content: center;
+	margin: 10px;
+}
