@@ -1,8 +1,7 @@
 import React from 'react'
 import Book from './Book'
 
-const BookShelf = (props) => {
-	const { shelf, books } = props
+const BookShelf = ({ shelf, books, onChangeShelf }) => {
 
 	if (books.length === 0) {
 		return null
@@ -20,9 +19,12 @@ const BookShelf = (props) => {
 					{books.map(book => (
 						<li key={book.industryIdentifiers[0].identifier}>
 							<Book
+								book={book}
+								shelf={book.shelf}
 								title={book.title}
 								author={book.authors.join(', ')}
 								bookCoverUrl={book.imageLinks.smallThumbnail}
+								onChangeShelf={onChangeShelf}
 							/>
 						</li>
 					))}
