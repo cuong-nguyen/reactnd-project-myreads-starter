@@ -37,9 +37,16 @@ const Book = ({
 }) => {
 
 	return (
+
 		<div className="book">
 			<div className="book-top">
-				<div className="book-cover" style={{ width, height, backgroundImage: `url("${book.imageLinks.smallThumbnail}")` }}></div>
+				<div className="book-cover"
+					style={{
+						width,
+						height,
+						backgroundImage: `url("${book.imageLinks.smallThumbnail}")`
+					}}>
+				</div>
 				<div className="book-shelf-changer">
 					<ShelfChanger
 						book={book}
