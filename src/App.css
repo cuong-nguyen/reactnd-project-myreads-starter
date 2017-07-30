@@ -189,8 +189,23 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* Loading  */
+
 .loading {
 	display: flex;
 	justify-content: center;
 	margin: 10px;
+}
+
+/* Rating  */
+.rating {
+	display: inline-block;
+}
+.rating i.fa {
+	color: #2e7c31;
+	margin: 2px;
+}
+.total-ratings {
+	font-size: 0.8em;
 }

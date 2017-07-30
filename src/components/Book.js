@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Rating from './Rating'
 
 const ShelfChanger = ({ book, onChangeShelf }) => {
 	const shelves = [{
@@ -36,7 +37,6 @@ ShelfChanger.propTypes = {
 }
 
 const Book = ({ book, width, height, onChangeShelf }) => {
-
 	return (
 		<div className="book">
 			<div className="book-top">
@@ -53,6 +53,7 @@ const Book = ({ book, width, height, onChangeShelf }) => {
 			</div>
 			<div className="book-title">{book.title}</div>
 			<div className="book-authors">{book.authors && book.authors.join(', ')}</div>
+			<Rating stars={book.averageRating} totalRatings={book.ratingsCount || 0} />
 		</div>
 	)
 }
