@@ -21,16 +21,19 @@ const ListBooks = ({ loaded, books, onChangeShelf }) => {
 					<div>
 						<BookShelf
 							shelf="Currently Reading"
+							icon="fa-eye"
 							books={filterAndSortBooks(books, 'currentlyReading')}
 							onChangeShelf={onChangeShelf}
 						/>
 						<BookShelf
 							shelf="Want to Read"
+							icon="fa-calendar"
 							books={filterAndSortBooks(books, 'wantToRead')}
 							onChangeShelf={onChangeShelf}
 						/>
 						<BookShelf
 							shelf="Read"
+							icon="fa-check-square"
 							books={filterAndSortBooks(books, 'read')}
 							onChangeShelf={onChangeShelf}
 						/>
