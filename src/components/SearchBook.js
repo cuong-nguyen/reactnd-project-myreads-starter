@@ -31,6 +31,10 @@ class SearchBook extends Component {
 
 	searchBook = () => {
 		const { query } = this.state
+
+		// query is empty, do nothing
+		if (!query) return
+
 		this.setState({ searching: true })
 
 		BooksAPI
@@ -57,6 +61,11 @@ class SearchBook extends Component {
 		})
 	}
 
+	handleClearSearch = () => {
+		this.setState({ query: '' })
+		this.searchBox.focus()
+	}
+
 	render() {
 		const { query, searching, books } = this.state
 
@@ -70,9 +79,11 @@ class SearchBook extends Component {
 							type="text"
 							placeholder="Search by title or author"
 							onChange={this.handleChange}
+							ref={input => { this.searchBox = input }}
 							autoFocus
 						/>
 					</div>
+					{query && <a className="clear-search" onClick={this.handleClearSearch}>Clear</a>}
 				</div>
 				<div className="search-books-results">
 					{searching
