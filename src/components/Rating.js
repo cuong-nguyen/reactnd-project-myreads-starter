@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Rating = ({ stars, totalRatings }) => {
+const Rating = ({ stars = 0, totalRatings }) => {
 	return (
 		<div className="rating" title={stars}>
-			{[1, 2, 3, 4, 5].map(s => (
+			{[1, 2, 3, 4, 5].map((s, index) => (
 				<i
+					key={index}
 					className={`fa ${stars >= s ? "fa-star" : (s - stars === 0.5) ? "fa-star-half-o" : "fa-star-o"}`} aria-hidden="true">
 				</i>
 			))}
@@ -15,7 +16,7 @@ const Rating = ({ stars, totalRatings }) => {
 }
 
 Rating.propTypes = {
-	stars: PropTypes.number.isRequired,
+	stars: PropTypes.number,
 	totalRatings: PropTypes.number
 }
 
