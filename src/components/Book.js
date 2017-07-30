@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import Rating from './Rating'
 
 const BookShelfChanger = ({ book, onChangeShelf }) => {
@@ -28,19 +29,21 @@ const Book = ({ book, width, height, onChangeShelf }) => {
 	return (
 		<div className="book">
 			<div className="book-top">
-				<div className="book-cover"
-					style={{
-						width,
-						height,
-						backgroundImage: `url("${book.imageLinks.thumbnail}")`
-					}}>
-				</div>
+				<Link to={{ pathname: `/details/${book.id}`, state: book }}>
+					<span className="book-cover"
+						style={{
+							width,
+							height,
+							backgroundImage: `url("${book.imageLinks.thumbnail}")`
+						}}>
+					</span>
+				</Link>
 				<BookShelfChanger book={book} onChangeShelf={onChangeShelf} />
 			</div>
 			<div className="book-title">{book.title}</div>
 			{book.authors && <div className="book-authors">{book.authors.join(', ')}</div>}
 			<Rating stars={book.averageRating} totalRatings={book.ratingsCount || 0} />
-		</div>
+		</div >
 	)
 }
 

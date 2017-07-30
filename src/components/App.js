@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import ListBooks from './ListBooks'
 import SearchBook from './SearchBook'
+import Details from './Details'
 import '../App.css'
 import * as BooksAPI from '../utils/BooksAPI'
 
@@ -56,7 +57,11 @@ class BooksApp extends Component {
 				/>
 				<Route
 					path="/search"
-					render={() => <SearchBook books={this.state.books} onChangeShelf={this.handleChangeShelf} />} />
+					render={() => <SearchBook books={this.state.books} onChangeShelf={this.handleChangeShelf} />}
+				/>
+				<Route
+					path="/details/:id"
+					render={(props) => <Details {...props} />} />
 			</div>
 		)
 	}

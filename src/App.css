@@ -33,7 +33,13 @@ body, .app {
 @media (min-width: 600px) {
   .bookshelf {
     padding: 20px 20px 40px;
-  }
+	}
+}
+
+@media (max-width: 500px) {
+	.list-books-title h1 {
+		font-size: 1em
+	}
 }
 
 .bookshelf-title {
@@ -93,7 +99,8 @@ body, .app {
   outline: none;
 }
 
-.close-search {
+.close-search,
+.back-link {
   display: block;
   top: 20px;
   left: 15px;
@@ -105,6 +112,14 @@ body, .app {
   background-repeat: no-repeat;
   background-size: 28px;
   font-size: 0;
+}
+
+.back-link {
+	display: inline-block;
+	position: absolute;
+	top: 7px;
+	background: none;
+	background-image: url('./icons/arrow-back-white.svg');
 }
 
 .clear-search {
@@ -191,6 +206,7 @@ body, .app {
 	background: #eee;
 	border-radius: 3px;
 	cursor: pointer;
+	display: block;
 }
 .book-cover-title {
   padding: 20px 10px 0;
@@ -216,4 +232,30 @@ body, .app {
 }
 .total-ratings {
 	font-size: 0.8em;
+}
+
+/* Book Detail  */
+.book-detail {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.book-detail .book-cover {
+	cursor: default;
+}
+.book-info {
+	display: flex;
+	flex-direction: row;
+}
+.book-info ul {
+	list-style-type: none;
+	margin: 0;
+	font-size: 0.9em;
+}
+.book-info li i.fa {
+	margin: 0 5px;
+}
+.book-info li a {
+	text-decoration: none;
+	color: blue
 }
