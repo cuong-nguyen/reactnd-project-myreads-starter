@@ -90,8 +90,8 @@ class SearchBook extends Component {
 						? <Loading />
 						: (
 							<ol className="books-grid">
-								{books.map(book =>
-									<li key={book.id}>
+								{books.map((book, index) =>
+									<li key={index}>
 										<Book book={book} onChangeShelf={this.props.onChangeShelf} />
 									</li>
 								)}
