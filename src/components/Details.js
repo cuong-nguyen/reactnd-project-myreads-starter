@@ -35,7 +35,6 @@ class Details extends Component {
 
 	render() {
 		const { book, loading } = this.state
-		console.log(book)
 		const { width, height } = this.props
 
 		return (
@@ -62,7 +61,7 @@ class Details extends Component {
 									</li>
 									<li>
 										<i className="fa fa-users" aria-hidden="true"></i>
-										{book.authors.join(', ')}
+										{(book.authors || []).join(', ')}
 									</li>
 									<li>
 										<i className="fa fa-book" aria-hidden="true"></i>

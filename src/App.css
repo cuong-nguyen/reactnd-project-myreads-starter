@@ -252,6 +252,9 @@ body, .app {
 	margin: 0;
 	font-size: 0.9em;
 }
+.book-info ul li {
+	margin: 2px 0;
+}
 .book-info li i.fa {
 	margin: 0 5px;
 }
