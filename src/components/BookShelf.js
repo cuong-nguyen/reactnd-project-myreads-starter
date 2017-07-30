@@ -10,11 +10,11 @@ const BookShelf = ({ shelf, books, onChangeShelf }) => {
 
 	return (
 		<div className="bookshelf">
-			<h3 className="bookshelf-title">
+			<p className="bookshelf-title">
 				<i className="fa fa-book" aria-hidden="true"></i>
 				{' '}
 				{shelf}
-			</h3>
+			</p>
 			<div className="bookshelf-books">
 				<ol className="books-grid">
 					{books.map(book => (

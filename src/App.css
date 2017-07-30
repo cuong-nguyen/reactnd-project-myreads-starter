@@ -37,10 +37,16 @@ body, .app {
 }
 
 .bookshelf-title {
-  border-bottom: 1px solid #dedede;
+	/* border-bottom: 1px solid #dedede; */
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
 }
 .bookshelf-books {
-  text-align: center;
+	text-align: center;
+	border: 1px solid #999;
+	border-radius: 3px;
+	box-shadow: 0 0 10px 0 rgba(0,0,0,0.18)
 }
 
 .open-search {
