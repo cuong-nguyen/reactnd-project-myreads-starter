@@ -200,6 +200,20 @@ body, .app {
   cursor: pointer;
 }
 
+.bookshelf-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.bookshelf-header .book-shelf-changer {
+	right: 2px;
+	top: 2px;
+	width: 30px;
+	height: 30px;
+	background-color: orange;
+	position: relative;
+}
+
 /* book cover */
 
 .book-cover {

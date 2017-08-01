@@ -21,30 +21,58 @@ class BooksApp extends Component {
 			})
 	}
 
-	handleChangeShelf = (book, newShelf) => {
-		BooksAPI
-			.update(book, newShelf)
-			.then((response) => {
-				let books
+	updateBook(book, newShelf) {
+		let books
 
-				if (newShelf === 'none') {
-					books = this.state.books.filter(b => b.id !== book.id)
-				} else {
-					let bookFound = false
-					books = this.state.books.map(currentBook => {
-						if (currentBook.id === book.id) {
-							currentBook.shelf = newShelf
-							bookFound = true
-						}
-						return currentBook
-					})
-
-					if (!bookFound) {
-						books = [...books, Object.assign({}, book, { shelf: newShelf })]
-					}
+		if (newShelf === 'none') {
+			books = this.state.books.filter(b => b.id !== book.id)
+		} else {
+			let bookFound = false
+			books = this.state.books.map(currentBook => {
+				if (currentBook.id === book.id) {
+					currentBook.shelf = newShelf
+					bookFound = true
 				}
+				return currentBook
+			})
 
-				this.setState({ books: books })
+			if (!bookFound) {
+				books = [...books, Object.assign({}, book, { shelf: newShelf })]
+			}
+		}
+
+		this.setState({ books })
+	}
+
+	updateAllBooks(updatingBooks, newShelf, oldShelf) {
+		let books
+		books = this.state.books.filter(b => b.shelf !== oldShelf)
+
+		if (newShelf !== 'none') {
+			const newBooks = updatingBooks.map(book => {
+				book.shelf = newShelf
+				return book
+			})
+
+			books = books.concat(newBooks)
+		}
+
+		this.setState({ books })
+	}
+
+	handleChangeShelf = (updatingBooks, newShelf) => {
+		const [book, ...moreBooks] = updatingBooks
+
+		BooksAPI
+			.updateAll(updatingBooks, newShelf)
+			.then(() => {
+				if (moreBooks.length) {
+					// bulk update
+					const oldShelf = book.shelf
+					this.updateAllBooks(updatingBooks, newShelf, oldShelf)
+				} else {
+					this.updateBook(book, newShelf)
+				}
 			})
 	}
 

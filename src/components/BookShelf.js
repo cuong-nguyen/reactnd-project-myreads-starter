@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Book from './Book'
+import BookShelfChanger from './BookShelfChanger'
 
 const BookShelf = ({ shelf, books, icon, onChangeShelf }) => {
 
@@ -11,10 +12,13 @@ const BookShelf = ({ shelf, books, icon, onChangeShelf }) => {
 	return (
 		<div className="bookshelf">
 			<div className="bookshelf-books">
-				<div className="bookshelf-title">
-					<i className={`fa ${icon}`} aria-hidden="true"></i>
-					{' '}
-					{shelf}
+				<div className="bookshelf-header">
+					<div className="bookshelf-title">
+						<i className={`fa ${icon}`} aria-hidden="true"></i>
+						{' '}
+						{shelf}
+					</div>
+					<BookShelfChanger books={books} onChangeShelf={onChangeShelf} />
 				</div>
 				<ol className="books-grid">
 					{books.map(book => (

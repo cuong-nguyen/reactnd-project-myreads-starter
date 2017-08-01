@@ -17,7 +17,7 @@ const Book = ({ book, width, height, onChangeShelf }) => {
 						}}>
 					</span>
 				</Link>
-				<BookShelfChanger book={book} onChangeShelf={onChangeShelf} />
+				<BookShelfChanger books={[book]} onChangeShelf={onChangeShelf} />
 			</div>
 			<div className="book-title">{book.title}</div>
 			{book.authors && <div className="book-authors">{book.authors.join(', ')}</div>}
