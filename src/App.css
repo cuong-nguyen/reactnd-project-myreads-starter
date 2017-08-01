@@ -45,14 +45,15 @@ body, .app {
 .bookshelf-title {
 	background-color: #2e7c31;
 	padding: 3px 5px;
-	border-radius: 3px 0;
+	border-radius: 0 0 3px 0;
 	color: #FFF;
-	box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+	/* box-shadow: 0 0 10px 0 rgba(0,0,0,0.4); */
 	min-width: 150px;
 	display: inline-block;
 }
 .bookshelf-books {
 	border: 1px solid #999;
+	border-left: 3px solid #2e7c31;
 	border-radius: 3px;
 	box-shadow: 0 0 10px 0 rgba(0,0,0,0.18)
 }
