@@ -32,14 +32,15 @@ class SearchBook extends Component {
 	searchBook = () => {
 		const { query } = this.state
 
-		// query is empty, do nothing
-		if (!query) return
+		// query is empty or it matches last run query, do nothing
+		if (!query || this.lastQuery === query) return
 
 		this.setState({ searching: true })
 
 		BooksAPI
 			.search(query, MaxSearchResult)
 			.then(books => {
+				this.lastQuery = query
 				this.setState({
 					books: this.updateBooksShelfChanger(books),
 					searching: false
